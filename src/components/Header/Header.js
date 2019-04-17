@@ -5,15 +5,19 @@ import TokenService from '../../services/token-service'
 import './Header.css'
 
 export default class Header extends Component {
-  handleLogoutClick = () => {
+  handleLogoutClick(){
+    TokenService.clearAuthToken();
+    //debugger
+
+    //console.log(this.props)
   }
 
   renderLogoutLink() {
     return (
       <div className='Header__logged-in'>
         <Link
-          onClick={this.handleLogoutClick}
-          to='/'>
+          onClick={()=> this.handleLogoutClick()}
+          to='/login'>
           Logout
         </Link>
       </div>
@@ -21,6 +25,7 @@ export default class Header extends Component {
   }
 
   renderLoginLink() {
+    console.log(TokenService.hasAuthToken(),'test has token')
     return (
       <div className='Header__not-logged-in'>
         <Link
@@ -36,6 +41,7 @@ export default class Header extends Component {
   }
 
   render() {
+    
     return <>
       <nav className='Header'>
         <h1>
